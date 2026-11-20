@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* Theme: the single place for shared values. Components use these tokens
+   (bg-brand, text-ink-muted, border-line ...) rather than literals. */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-brand: #0176d3;
+  --color-brand-dark: #014486;
+  --color-brand-light: #eef4ff;
+  --color-canvas: #f3f3f3;
+  --color-surface: #ffffff;
+  --color-surface-alt: #fafaf9;
+  --color-line: #e5e5e5;
+  --color-line-strong: #c9c9c9;
+  --color-ink: #181818;
+  --color-ink-muted: #5c5c5c;
+  --color-ink-faint: #939393;
+
+  --color-success: #2e844a;
+  --color-success-light: #ebf7e6;
+  --color-warning: #dd7a01;
+  --color-warning-light: #fef1e3;
+  --color-danger: #ba0517;
+  --color-danger-light: #feded8;
+
+  /* Object identity colours (icon tiles) */
+  --color-obj-home: #0176d3;
+  --color-obj-accounts: #5867e8;
+  --color-obj-contacts: #9050e9;
+  --color-obj-leads: #f38303;
+  --color-obj-opportunities: #e8a400;
+  --color-obj-cases: #c23934;
+  --color-obj-activities: #3ba755;
+  --color-obj-campaigns: #e3066a;
+  --color-obj-products: #06a59a;
+  --color-obj-reports: #2e844a;
+  --color-obj-settings: #706e6b;
+
+  --radius-card: 0.25rem;
+  --shadow-card: 0 2px 2px 0 rgb(0 0 0 / 0.08);
+}
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+  body {
+    @apply font-sans text-[13px] leading-normal antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-card border border-line bg-surface shadow-card;
+  }
+  .btn {
+    @apply inline-flex h-8 items-center justify-center gap-1.5 rounded-card border border-line-strong bg-surface px-3 text-[13px] font-medium text-brand transition-colors hover:bg-canvas disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply border-brand bg-brand text-white hover:border-brand-dark hover:bg-brand-dark;
+  }
+  .btn-danger {
+    @apply border-danger bg-danger text-white hover:opacity-90;
+  }
+  .btn-sm {
+    @apply h-7 px-2 text-xs;
+  }
+  .input {
+    @apply block h-8 w-full rounded-card border border-line-strong bg-surface px-3 text-[13px] text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand;
+  }
+  textarea.input {
+    @apply h-auto min-h-20 py-2;
+  }
+  .label {
+    @apply mb-1 block text-xs text-ink-muted;
+  }
+  .link {
+    @apply text-brand hover:underline;
+  }
+}
+
+@layer components {
+  .btn[aria-disabled="true"] {
+    @apply pointer-events-none opacity-50;
+  }
+}
